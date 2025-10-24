@@ -1,0 +1,23 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de configuración sensibles (si tienes)
+.env
+config.ini # O el nombre de tu archivo de config
+
+# Archivos de IDE/Editor
+.idea/
+.vscode/
+
+# Archivos de logs
+*.log
+
+# Otros (ej. archivos temporales)
+*.tmp
