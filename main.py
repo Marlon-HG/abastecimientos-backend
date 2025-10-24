@@ -1,3 +1,4 @@
+# C:\Users\marlo\Desktop\abastecimientos_backend\main.py
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,15 +22,18 @@ from api.routers import (
 
 app = FastAPI(title="Abastecimientos API")
 
-# Configuración de CORS
+# --- CORRECCIÓN ---
+# Añade la URL de tu frontend en Vercel a la lista de orígenes
 origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
+    "https://abastecimientos-frontend.vercel.app", # <-- URL de producción (Vercel)
+    "http://localhost:5173",                      # URL de desarrollo local (Vite)
+    "http://localhost:3000",                      # URL de desarrollo local (CRA)
 ]
+# --- FIN CORRECCIÓN ---
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins,       # <-- Usa la lista actualizada
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
