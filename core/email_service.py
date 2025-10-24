@@ -172,7 +172,7 @@ async def send_password_reset_email(db: Session, user_id: int, email_to: str, no
     """
     Envía un correo con el enlace para restablecer la contraseña.
     """
-    reset_url = f"http://localhost:3000/reset-password?token={token}"
+    reset_url = f"https://abastecimientos-backend.onrender.com/reset-password?token={token}"
     html = f"""
     <!DOCTYPE html>
     <html lang="es">
