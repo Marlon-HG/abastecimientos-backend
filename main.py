@@ -56,3 +56,5 @@ app.include_router(tipos_sitio.router)
 @app.get("/")
 def read_root():
     return {"message": "Bienvenido a la API de Abastecimientos Tigo"}
+
+# Forzar build
