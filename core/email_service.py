@@ -2,7 +2,9 @@ from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
 from sqlalchemy.orm import Session
 from core.config import settings
 import datetime
+from sqlalchemy.orm import Session
 
+from db.models import CanalEnvioEnum
 # --- CAMBIOS: Importar módulos para el logging ---
 from db import models
 from crud import notificacion as notificacion_crud
@@ -29,6 +31,7 @@ async def _send_and_log_message(db: Session, message: MessageSchema, log_data_di
     Función interna que intenta enviar un correo, añade el estado del envío al
     diccionario del log, y luego crea y guarda el registro.
     """
+    from schemas.notificacion import MessageSchema, MessageType
     fm = FastMail(conf)
     try:
         await fm.send_message(message)
@@ -172,7 +175,9 @@ async def send_password_reset_email(db: Session, user_id: int, email_to: str, no
     """
     Envía un correo con el enlace para restablecer la contraseña.
     """
-    reset_url = f"https://abastecimientos-backend.onrender.com/reset-password?token={token}"
+
+    reset_url = f"https://abastecimientos-frontend.vercel.app/reset-password/{token}"
+
     html = f"""
     <!DOCTYPE html>
     <html lang="es">
@@ -223,7 +228,6 @@ async def send_password_reset_email(db: Session, user_id: int, email_to: str, no
     )
     log_data_dict = {
         "id_usuario_destino": user_id,
-        # --- CORREGIDO ---
         "canal_envio": CanalEnvioEnum.EMAIL,
         "direccion_destino": email_to
     }
